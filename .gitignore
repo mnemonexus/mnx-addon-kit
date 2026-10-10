@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.mnxpack
+*.sig.json
+*.key
+keys/
+.env
+.env.*
+test-results/
+playwright-report/
+.mnx-dev/
+templates/*/screenshots/
+addons/*/screenshots/
+examples/*/screenshots/
+ui/*/screenshots/

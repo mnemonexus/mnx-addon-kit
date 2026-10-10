@@ -1,0 +1,44 @@
+{
+  "name": "@mnemonexus/addon-sdk",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Public authoring tools for independently built MnemoNexus sandbox add-ons",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.mjs"
+    },
+    "./pack": {
+      "types": "./src/build-pack.d.ts",
+      "import": "./src/build-pack.mjs"
+    },
+    "./learning": {
+      "types": "./src/learning.d.ts",
+      "import": "./src/learning.mjs"
+    },
+    "./validate": {
+      "types": "./src/validate.d.ts",
+      "import": "./src/validate.mjs"
+    },
+    "./sign": {
+      "types": "./src/sign.d.ts",
+      "import": "./src/sign.mjs"
+    },
+    "./shims": {
+      "types": "./src/shims.d.ts",
+      "import": "./src/shims.mjs"
+    }
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "bun test"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2"
+  }
+}

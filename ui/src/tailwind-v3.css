@@ -1,0 +1,68 @@
+/*
+ * Tailwind 3's behaviour, for projects ported from Tailwind 3. The kit adds
+ * this, after the tokens, when an add-on brings its own tailwind.config.
+ *
+ * The defaults are the ones Tailwind's upgrade guide gives for keeping v3's
+ * look. The opacity utilities (bg-opacity-50 …), which Tailwind 4 removed,
+ * are defined here; after compiling, the kit makes the colour utilities read
+ * them.
+ */
+
+@theme {
+  /* `ring` was 3px, in blue-500 at half strength. */
+  --default-ring-width: 3px;
+  --default-ring-color: color-mix(in oklab, var(--color-blue-500, currentcolor) 50%, transparent);
+}
+
+/* Hover styles applied on touch screens too. */
+@custom-variant hover (&:hover);
+
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+  input::placeholder, textarea::placeholder {
+    color: var(--color-gray-400, currentcolor);
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* bg-opacity-50, or bg-opacity-[.35]: the strength of the element's colour utility. */
+@utility bg-opacity-* {
+  --tw-bg-opacity: calc(--value(integer) * 1%);
+  --tw-bg-opacity: calc(--value([number]) * 100%);
+}
+@utility text-opacity-* {
+  --tw-text-opacity: calc(--value(integer) * 1%);
+  --tw-text-opacity: calc(--value([number]) * 100%);
+}
+@utility border-opacity-* {
+  --tw-border-opacity: calc(--value(integer) * 1%);
+  --tw-border-opacity: calc(--value([number]) * 100%);
+}
+@utility ring-opacity-* {
+  --tw-ring-opacity: calc(--value(integer) * 1%);
+  --tw-ring-opacity: calc(--value([number]) * 100%);
+}
+@utility divide-opacity-* {
+  & > :not(:last-child) {
+    --tw-divide-opacity: calc(--value(integer) * 1%);
+    --tw-divide-opacity: calc(--value([number]) * 100%);
+  }
+}
+@utility placeholder-opacity-* {
+  &::placeholder {
+    --tw-placeholder-opacity: calc(--value(integer) * 1%);
+    --tw-placeholder-opacity: calc(--value([number]) * 100%);
+  }
+}
+
+/* Not inherited, as in Tailwind 3, where each colour utility reset its own. */
+@property --tw-bg-opacity { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+@property --tw-text-opacity { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+@property --tw-border-opacity { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+@property --tw-ring-opacity { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+@property --tw-divide-opacity { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+@property --tw-placeholder-opacity { syntax: "<percentage>"; inherits: false; initial-value: 100%; }

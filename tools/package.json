@@ -1,0 +1,18 @@
+{
+  "name": "@mnemonexus/mnx-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "The mnx command-line tool: new, dev, check, pack, sign, verify.",
+  "bin": {
+    "mnx": "./src/cli.ts"
+  },
+  "dependencies": {
+    "@mnemonexus/addon-sdk": "0.1.0",
+    "@mnemonexus/mock-host": "0.1.0",
+    "fflate": "^0.8.2",
+    "playwright": "1.56.1",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "title": "Standalone, from knowledge items",
+  "surface": "standalone",
+  "items": [
+    { "itemId": "i-mito", "lineageId": "lin-mito", "conceptId": "c-mito", "conceptTitle": "Mitochondrion", "conceptKind": "entity",
+      "descriptorType": "function", "text": "Makes most of the cell's ATP by aerobic respiration.", "discipline": "biology" },
+    { "itemId": "i-ribo", "lineageId": "lin-ribo", "conceptId": "c-ribo", "conceptTitle": "Ribosome", "conceptKind": "entity",
+      "descriptorType": "function", "text": "Translates messenger RNA into a chain of amino acids.", "discipline": "biology" },
+    { "itemId": "i-golgi", "lineageId": "lin-golgi", "conceptId": "c-golgi", "conceptTitle": "Golgi apparatus", "conceptKind": "entity",
+      "descriptorType": "function", "text": "Modifies, sorts and packages proteins for secretion.", "discipline": "biology" },
+    { "itemId": "i-lyso", "lineageId": "lin-lyso", "conceptId": "c-lyso", "conceptTitle": "Lysosome", "conceptKind": "entity",
+      "descriptorType": "function", "text": "Breaks down worn-out organelles with digestive enzymes.", "discipline": "biology" }
+  ],
+  "ai": { "answers": [ { "match": "hint", "reply": "Think about which organelle uses oxygen." } ] },
+  "drive": [
+    { "waitFor": "[data-choice=c-mito]" },
+    { "press": "h" },
+    { "waitForText": "[role=status]", "text": "oxygen" },
+    { "click": "[data-choice=c-golgi]" },
+    { "click": "[data-choice=c-mito]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-choice=c-ribo]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-choice=c-golgi]" },
+    { "click": "[data-action=next]" },
+    { "press": "2" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-action=finish]" },
+    { "expect": "complete" }
+  ]
+}

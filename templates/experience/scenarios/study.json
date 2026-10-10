@@ -1,0 +1,28 @@
+{
+  "title": "Study, reviewed task (today's host)",
+  "surface": "study",
+  "study": {
+    "taskId": "cell-organelles",
+    "workspaceId": "ws-demo",
+    "lectureId": "bio-101-lecture-3",
+    "lectureTitle": "Biology 101: inside the cell",
+    "subsectionId": "organelles",
+    "subsectionTitle": "Organelles and their jobs",
+    "depth": "standard"
+  },
+  "drive": [
+    { "click": "[data-choice=golgi]" },
+    { "click": "[data-choice=mitochondrion]" },
+    { "click": "[data-action=next]" },
+    { "relaunch": true },
+    { "waitForText": "[data-view=check]", "text": "Welcome back" },
+    { "click": "[data-action=hint]" },
+    { "waitForText": "[role=status]", "text": "messenger RNA" },
+    { "click": "[data-choice=ribosome]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-choice=golgi]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-action=finish]" },
+    { "expect": "complete" }
+  ]
+}

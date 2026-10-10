@@ -1,0 +1,6 @@
+{
+  "title": "Prepare: unordered bullets (no task)",
+  "prepare": true,
+  "source": { "objective": "Name the parts", "text": "- unordered one\n- unordered two\n- unordered three" },
+  "expectOffers": 0
+}

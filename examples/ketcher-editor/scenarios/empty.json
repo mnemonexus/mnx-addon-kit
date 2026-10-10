@@ -1,0 +1,10 @@
+{
+  "title": "Done with nothing drawn, then leave",
+  "surface": "standalone",
+  "drive": [
+    { "click": "[data-action=done]" },
+    { "waitForText": "[role=status]", "text": "Nothing drawn yet" },
+    { "click": "[data-action=leave]" },
+    { "expect": "exit" }
+  ]
+}

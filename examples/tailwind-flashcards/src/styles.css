@@ -1,0 +1,5 @@
+/*
+ * Tailwind 4. The kit compiles this when it builds the add-on, and adds the
+ * MnemoNexus preset, so `bg-mnx-surface` and friends follow the user's theme.
+ */
+@import "tailwindcss";

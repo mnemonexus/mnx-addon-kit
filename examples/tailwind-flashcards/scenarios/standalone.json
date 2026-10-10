@@ -1,0 +1,20 @@
+{
+  "title": "Standalone, three cards",
+  "surface": "standalone",
+  "items": [
+    { "itemId": "c-mito", "conceptId": "c-mito", "conceptTitle": "Mitochondrion", "text": "Makes most of the cell's ATP by aerobic respiration." },
+    { "itemId": "c-ribo", "conceptId": "c-ribo", "conceptTitle": "Ribosome", "text": "Translates messenger RNA into a chain of amino acids." },
+    { "itemId": "c-golgi", "conceptId": "c-golgi", "conceptTitle": "Golgi apparatus", "text": "Modifies, sorts and packages proteins for secretion." }
+  ],
+  "drive": [
+    { "click": "[data-action=flip]" },
+    { "waitForText": "main", "text": "aerobic respiration" },
+    { "click": "[data-action=knew]" },
+    { "click": "[data-action=flip]" },
+    { "click": "[data-action=not-yet]" },
+    { "press": "Enter", "on": "[data-action=flip]" },
+    { "click": "[data-action=knew]" },
+    { "expect": "complete" }
+  ],
+  "expectResult": { "completed": true, "itemCoverage": { "c-mito": 1, "c-ribo": 0.5, "c-golgi": 1 } }
+}

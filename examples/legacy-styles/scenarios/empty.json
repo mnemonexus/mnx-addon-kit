@@ -1,0 +1,9 @@
+{
+  "title": "Standalone, no items",
+  "surface": "standalone",
+  "drive": [
+    { "waitForText": "main", "text": "Nothing to review" },
+    { "click": "[data-action=leave]" },
+    { "expect": "exit" }
+  ]
+}

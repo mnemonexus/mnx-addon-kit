@@ -1,0 +1,17 @@
+{
+  "title": "Every component",
+  "surface": "standalone",
+  "drive": [
+    { "waitFor": "[data-section=buttons]" },
+    { "click": "[data-choice=b]" },
+    { "waitFor": "[data-choice=b][aria-pressed=true]" },
+    { "press": "Space", "on": "[data-check=storage]" },
+    { "click": "[data-chip='3']" },
+    { "waitFor": "[data-chip='3'][aria-pressed=true]" },
+    { "fill": "#gallery-name", "text": "Ada" },
+    { "click": "[data-action=check-name]" },
+    { "waitForText": "[data-feedback=name]", "text": "Hello, Ada." },
+    { "click": "[data-action=finish]" },
+    { "expect": "complete" }
+  ]
+}

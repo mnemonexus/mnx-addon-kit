@@ -1,0 +1,21 @@
+{
+  "title": "Standalone, settings: hints off, then on; Model calls off",
+  "surface": "standalone",
+  "settings": { "showHints": false },
+  "modelCalls": "off",
+  "ai": { "answers": [ { "match": "hint", "reply": "A model hint that must not be used." } ] },
+  "drive": [
+    { "waitFor": "[data-choice=mnx-storage]" },
+    { "waitForGone": "[data-action=hint]" },
+    { "setting": { "showHints": true } },
+    { "waitFor": "[data-action=hint]" },
+    { "click": "[data-action=hint]" },
+    { "waitForText": "[role=status]", "text": "Hint: The sandbox blocks" },
+    { "click": "[data-choice=mnx-storage]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-choice=textcontent]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-action=finish]" },
+    { "expect": "complete" }
+  ]
+}

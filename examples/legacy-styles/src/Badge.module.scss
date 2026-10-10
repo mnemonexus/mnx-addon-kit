@@ -1,0 +1,17 @@
+@import 'palette';
+
+// A CSS module in Sass: the class names come out unique.
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: $badge-radius;
+  color: $badge-ink;
+  background: $badge-paper;
+  font-size: 12px;
+  font-weight: 600;
+
+  &.done {
+    color: darken($badge-ink, 5%);
+    background: mix($badge-paper, #d1fae5, 30%);
+  }
+}

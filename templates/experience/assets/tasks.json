@@ -1,0 +1,99 @@
+{
+  "tasks": {
+    "cell-organelles": {
+      "title": "Cell organelles",
+      "intro": "Match each job to the organelle that does it.",
+      "questions": [
+        {
+          "id": "atp",
+          "prompt": "Which organelle makes most of the cell's ATP?",
+          "choices": [
+            { "id": "golgi", "label": "Golgi apparatus" },
+            { "id": "mitochondrion", "label": "Mitochondrion" },
+            { "id": "ribosome", "label": "Ribosome" }
+          ],
+          "answer": "mitochondrion",
+          "hint": "It has its own DNA and a folded inner membrane."
+        },
+        {
+          "id": "protein-synthesis",
+          "prompt": "Where are proteins made?",
+          "choices": [
+            { "id": "lysosome", "label": "Lysosome" },
+            { "id": "ribosome", "label": "Ribosome" },
+            { "id": "vacuole", "label": "Vacuole" }
+          ],
+          "answer": "ribosome",
+          "hint": "It reads messenger RNA."
+        },
+        {
+          "id": "packaging",
+          "prompt": "Which organelle modifies and packages proteins for export?",
+          "choices": [
+            { "id": "golgi", "label": "Golgi apparatus" },
+            { "id": "nucleus", "label": "Nucleus" },
+            { "id": "mitochondrion", "label": "Mitochondrion" }
+          ],
+          "answer": "golgi",
+          "hint": "It is a stack of flattened sacs near the endoplasmic reticulum."
+        }
+      ]
+    },
+    "photosynthesis-basics": {
+      "title": "Photosynthesis basics",
+      "intro": "Two questions on where and how plants capture light.",
+      "questions": [
+        {
+          "id": "site",
+          "prompt": "Where do the light-dependent reactions take place?",
+          "choices": [
+            { "id": "stroma", "label": "Stroma" },
+            { "id": "thylakoid", "label": "Thylakoid membrane" },
+            { "id": "cytoplasm", "label": "Cytoplasm" }
+          ],
+          "answer": "thylakoid",
+          "hint": "Chlorophyll sits in these stacked membranes."
+        },
+        {
+          "id": "calvin-input",
+          "prompt": "Which gas does the Calvin cycle fix?",
+          "choices": [
+            { "id": "o2", "label": "Oxygen" },
+            { "id": "co2", "label": "Carbon dioxide" },
+            { "id": "n2", "label": "Nitrogen" }
+          ],
+          "answer": "co2",
+          "hint": "Plants take it in through their stomata."
+        }
+      ]
+    }
+  },
+  "sample": {
+    "title": "Quick Check",
+    "intro": "No knowledge items came with this launch, so here is a sample.",
+    "questions": [
+      {
+        "id": "sample-sandbox",
+        "prompt": "Where does an add-on keep data between launches?",
+        "choices": [
+          { "id": "localstorage", "label": "The browser's local storage" },
+          { "id": "mnx-storage", "label": "mnx.storage, through the host" },
+          { "id": "cookies", "label": "Cookies" }
+        ],
+        "answer": "mnx-storage",
+        "hint": "The sandbox blocks the browser's own storage."
+      },
+      {
+        "id": "sample-text",
+        "prompt": "How should untrusted text go into the page?",
+        "choices": [
+          { "id": "innerhtml", "label": "innerHTML" },
+          { "id": "textcontent", "label": "textContent" },
+          { "id": "document-write", "label": "document.write" }
+        ],
+        "answer": "textcontent",
+        "hint": "It never parses markup."
+      }
+    ]
+  }
+}

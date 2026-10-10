@@ -1,0 +1,27 @@
+{
+  "name": "mnx-addon-kit",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "workspaces": [
+    "sdk",
+    "ui",
+    "tools",
+    "mock-host"
+  ],
+  "scripts": {
+    "new": "bun tools/src/cli.ts new",
+    "dev": "bun tools/src/cli.ts dev",
+    "check": "bun tools/src/cli.ts check",
+    "pack": "bun tools/src/cli.ts pack",
+    "sign": "bun tools/src/cli.ts sign",
+    "verify": "bun tools/src/cli.ts verify",
+    "keygen": "bun tools/src/cli.ts keygen",
+    "prompt": "bun tools/src/cli.ts prompt",
+    "ui": "bun ui/scripts/build-css.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1",
+    "typescript": "5.9.3"
+  }
+}

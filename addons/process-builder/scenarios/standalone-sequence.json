@@ -1,0 +1,18 @@
+{
+  "title": "Standalone: a sequence item",
+  "surface": "standalone",
+  "items": [
+    { "itemId": "i-mitosis", "lineageId": "lin-mitosis", "conceptId": "c-mitosis", "conceptTitle": "Mitosis", "conceptKind": "process",
+      "descriptorType": "mechanism_step", "descriptorStructure": "sequence", "text": "The phases of mitosis.",
+      "structuredItems": ["Prophase", "Metaphase", "Anaphase", "Telophase"] }
+  ],
+  "drive": [
+    { "click": "[data-step='0']" },
+    { "click": "[data-step='1']" },
+    { "click": "[data-step='2']" },
+    { "click": "[data-step='3']" },
+    { "click": "[data-action=check]" },
+    { "expect": "complete" }
+  ],
+  "expectResult": { "completed": true, "itemCoverage": { "lin-mitosis": 1 } }
+}

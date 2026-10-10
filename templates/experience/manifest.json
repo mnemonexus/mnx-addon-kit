@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "mnxpack_manifest_v1",
+  "id": "quick-check",
+  "version": "0.1.0",
+  "kind": "experience",
+  "label": "Quick Check",
+  "description": "A short multiple-choice check. Built from your knowledge items, or from reviewed example tasks in a study session.",
+  "tagline": "Three minutes, one concept at a time",
+  "icon": "fa-solid fa-list-check",
+  "author": "Your name",
+  "subjects": [
+    "biology"
+  ],
+  "knowledgeBinding": {
+    "mode": "consumes",
+    "compatRule": {
+      "kind": "minTextLength",
+      "value": 20,
+      "whenTrue": "The item has enough text to ask a question about.",
+      "whenFalse": "The item is too short to ask a question about."
+    }
+  },
+  "surfaces": {
+    "study": {
+      "version": 1,
+      "tasks": [
+        {
+          "id": "cell-organelles",
+          "label": "Cell organelles",
+          "schema": "quick-check-mcq-v1",
+          "matchAny": [
+            "organelle",
+            "organelles",
+            "mitochondria",
+            "endoplasmic reticulum"
+          ],
+          "maxSeconds": 300
+        },
+        {
+          "id": "photosynthesis-basics",
+          "label": "Photosynthesis basics",
+          "schema": "quick-check-mcq-v1",
+          "matchAny": [
+            "photosynthesis",
+            "light-dependent reactions",
+            "Calvin cycle"
+          ],
+          "maxSeconds": 300
+        }
+      ]
+    },
+    "recall": {
+      "maxSeconds": 60,
+      "producesGrade": true
+    }
+  },
+  "permissions": [
+    "knowledge:read",
+    "storage:local",
+    "ai:generate",
+    "schedule:recall"
+  ],
+  "settings": [
+    {
+      "id": "showHints",
+      "label": "Show the Hint button",
+      "description": "Turn this off to practise without hints.",
+      "type": "toggle",
+      "default": true
+    }
+  ],
+  "engines": {
+    "mnxSdk": "1.0.0"
+  },
+  "entry": {
+    "logicalPath": "code/main.cjs"
+  },
+  "assets": [
+    {
+      "logicalPath": "assets/tasks.json",
+      "mimeType": "application/json"
+    },
+    {
+      "logicalPath": "assets/illustration.svg",
+      "mimeType": "image/svg+xml"
+    }
+  ]
+}

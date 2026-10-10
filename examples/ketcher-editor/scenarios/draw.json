@@ -1,0 +1,14 @@
+{
+  "title": "Draw benzene and finish",
+  "surface": "standalone",
+  "drive": [
+    { "waitForText": "main", "text": "Draw a structure" },
+    { "waitFor": "div[data-testid=ketcher-canvas]" },
+    { "waitFor": "[data-testid=template-0]" },
+    { "click": "[data-testid=template-0]" },
+    { "click": "div[data-testid=ketcher-canvas]" },
+    { "click": "[data-action=done]" },
+    { "expect": "complete" }
+  ],
+  "expectResult": { "completed": true }
+}

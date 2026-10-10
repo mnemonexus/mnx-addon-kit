@@ -1,0 +1,77 @@
+/*
+ * The MnemoNexus tokens for Tailwind CSS 4, without removing Tailwind's own
+ * palette. `tailwind.css` is this plus that removal, and is what new add-ons
+ * get. The kit uses this file alone for an add-on that brings its own
+ * tailwind.config (a ported project), so its `bg-white` keeps working.
+ */
+
+@theme inline {
+  --color-mnx-canvas: var(--mnx-canvas);
+  --color-mnx-surface: var(--mnx-surface);
+  --color-mnx-surface-2: var(--mnx-surface-2);
+  --color-mnx-text: var(--mnx-text);
+  --color-mnx-text-muted: var(--mnx-text-muted);
+  --color-mnx-text-subtle: var(--mnx-text-subtle);
+  --color-mnx-border: var(--mnx-border);
+  --color-mnx-border-inner: var(--mnx-border-inner);
+  --color-mnx-accent: var(--mnx-accent);
+  --color-mnx-accent-strong: var(--mnx-accent-strong);
+  --color-mnx-accent-text: var(--mnx-accent-text);
+  --color-mnx-accent-soft: var(--mnx-accent-soft);
+  --color-mnx-secondary: var(--mnx-secondary);
+  --color-mnx-success: var(--mnx-success);
+  --color-mnx-warning: var(--mnx-warning);
+  --color-mnx-danger: var(--mnx-danger);
+  --color-mnx-neutral: var(--mnx-neutral);
+  --color-mnx-focus: var(--mnx-focus);
+  --color-mnx-edge: var(--mnx-edge-color);
+  --color-mnx-data-1: var(--mnx-data-1);
+  --color-mnx-data-2: var(--mnx-data-2);
+  --color-mnx-data-3: var(--mnx-data-3);
+  --color-mnx-data-4: var(--mnx-data-4);
+  --color-mnx-data-5: var(--mnx-data-5);
+  --color-mnx-data-6: var(--mnx-data-6);
+  --color-mnx-data-7: var(--mnx-data-7);
+  --color-mnx-data-8: var(--mnx-data-8);
+  --color-mnx-data-9: var(--mnx-data-9);
+  --color-mnx-data-10: var(--mnx-data-10);
+
+  --radius-xs: var(--mnx-radius-chip);
+  --radius-sm: var(--mnx-radius-chip);
+  --radius-md: var(--mnx-radius-button);
+  --radius-lg: var(--mnx-radius-surface);
+  --radius-xl: var(--mnx-radius-surface);
+  --radius-2xl: var(--mnx-radius-overlay);
+  --radius-3xl: var(--mnx-radius-overlay);
+  --radius-4xl: var(--mnx-radius-overlay);
+  --radius-mnx-surface: var(--mnx-radius-surface);
+  --radius-mnx-overlay: var(--mnx-radius-overlay);
+  --radius-mnx-button: var(--mnx-radius-button);
+  --radius-mnx-field: var(--mnx-radius-field);
+  --radius-mnx-chip: var(--mnx-radius-chip);
+
+  --shadow-2xs: var(--mnx-shadow);
+  --shadow-xs: var(--mnx-shadow);
+  --shadow-sm: var(--mnx-shadow);
+  --shadow-md: var(--mnx-shadow);
+  --shadow-lg: var(--mnx-shadow);
+  --shadow-xl: var(--mnx-shadow-overlay);
+  --shadow-2xl: var(--mnx-shadow-overlay);
+  --shadow-mnx: var(--mnx-shadow);
+  --shadow-mnx-overlay: var(--mnx-shadow-overlay);
+
+  --font-sans: var(--mnx-font);
+  --font-mono: var(--mnx-font-mono);
+  --font-mnx: var(--mnx-font);
+  --font-mnx-heading: var(--mnx-font-heading);
+  --font-mnx-mono: var(--mnx-font-mono);
+
+  --default-transition-duration: var(--mnx-duration);
+}
+
+/* The surface edge, as the theme sets it: lines, or nothing when lines are off. */
+@utility border-mnx {
+  border-width: var(--mnx-edge-width);
+  border-style: solid;
+  border-color: var(--mnx-edge-color);
+}

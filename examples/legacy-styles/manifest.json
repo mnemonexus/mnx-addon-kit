@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "mnxpack_manifest_v1",
+  "id": "legacy-styles",
+  "version": "0.1.0",
+  "kind": "experience",
+  "label": "Legacy Styles",
+  "description": "Review your knowledge items one by one. An example styled the way older projects are: Tailwind 3 with its own config, and Sass.",
+  "tagline": "Tailwind 3 and Sass, unchanged",
+  "icon": "fa-solid fa-box-archive",
+  "author": "MnemoNexus",
+  "knowledgeBinding": {
+    "mode": "consumes",
+    "compatRule": { "kind": "minTextLength", "value": 10, "whenTrue": "The item has a description to review.", "whenFalse": "The item is too short to review." }
+  },
+  "surfaces": {},
+  "permissions": ["knowledge:read"],
+  "engines": { "mnxSdk": "1.0.0" },
+  "entry": { "logicalPath": "code/main.cjs" },
+  "assets": []
+}

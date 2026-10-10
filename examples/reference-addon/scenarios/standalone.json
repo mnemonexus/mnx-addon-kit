@@ -1,0 +1,10 @@
+{
+  "title": "Standalone",
+  "surface": "standalone",
+  "drive": [
+    { "click": "[data-answer=true]" },
+    { "click": "[data-answer=true]" },
+    { "click": "[data-answer=true]" },
+    { "expect": "complete" }
+  ]
+}

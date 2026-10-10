@@ -1,0 +1,9 @@
+{
+  "title": "Standalone, no items",
+  "surface": "standalone",
+  "drive": [
+    { "waitForText": "main", "text": "No cards yet" },
+    { "click": "[data-action=leave]" },
+    { "expect": "exit" }
+  ]
+}

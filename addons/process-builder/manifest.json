@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "mnxpack_manifest_v1",
+  "id": "process-builder",
+  "version": "0.3.0",
+  "kind": "experience",
+  "label": "Process Builder",
+  "description": "Rebuild an explicitly ordered process from your current lecture. Uses supplied sequence knowledge or numbered source steps.",
+  "icon": "fa-solid fa-list-ol",
+  "author": "MnemoNexus",
+  "subjects": ["biology", "chemistry", "history"],
+  "knowledgeBinding": {
+    "mode": "consumes",
+    "compatRule": { "kind": "always", "whenTrue": "Source items are checked by the add-on", "whenFalse": "No compatible source" }
+  },
+  "surfaces": {},
+  "permissions": ["knowledge:read", "storage:local"],
+  "learning": {
+    "version": 1,
+    "schemas": {
+      "sequence-v1": {
+        "type": "object",
+        "properties": {
+          "steps": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 2000 }, "minItems": 3, "maxItems": 12 },
+          "targetId": { "type": "string", "minLength": 1, "maxLength": 2048 }
+        },
+        "required": ["steps", "targetId"],
+        "additionalProperties": false
+      }
+    },
+    "activities": [
+      { "id": "order-process", "label": "Order a process", "payloadSchema": "sequence-v1", "maxSeconds": 300, "surfaces": ["study"] }
+    ]
+  },
+  "engines": { "mnxSdk": "1.0.0" },
+  "entry": { "logicalPath": "code/main.cjs" },
+  "assets": []
+}

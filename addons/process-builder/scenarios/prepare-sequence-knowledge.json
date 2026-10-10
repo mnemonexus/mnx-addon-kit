@@ -1,0 +1,15 @@
+{
+  "title": "Prepare: a sequence knowledge item",
+  "prepare": true,
+  "source": {
+    "objective": "Describe DNA replication",
+    "text": "Replication copies DNA before the cell divides.",
+    "knowledge": [
+      { "itemId": "i-replication", "lineageId": "lin-replication", "conceptId": "c-replication", "conceptTitle": "DNA replication",
+        "conceptKind": "process", "descriptorType": "mechanism_step", "descriptorStructure": "sequence",
+        "text": "The steps of DNA replication.",
+        "structuredItems": ["Helicase unwinds the double helix", "Primase lays down an RNA primer", "DNA polymerase extends the new strand", "Ligase joins the Okazaki fragments"] }
+    ]
+  },
+  "expectOffers": 1
+}

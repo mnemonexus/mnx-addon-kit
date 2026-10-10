@@ -1,0 +1,23 @@
+{
+  "name": "@mnemonexus/mock-host",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "A local stand-in for the MnemoNexus add-on host.",
+  "exports": {
+    ".": "./src/server.ts",
+    "./core": "./src/core/index.ts",
+    "./addon": "./src/addon.ts"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/lexend-deca": "5.3.0",
+    "@mnemonexus/addon-sdk": "0.1.0",
+    "@mnemonexus/addon-ui": "0.1.0",
+    "@tailwindcss/node": "4.3.3",
+    "lightningcss": "1.32.0",
+    "sass": "1.104.1",
+    "tailwindcss": "4.3.3"
+  }
+}

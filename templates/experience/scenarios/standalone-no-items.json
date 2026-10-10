@@ -1,0 +1,13 @@
+{
+  "title": "Standalone, no items (sample questions)",
+  "surface": "standalone",
+  "items": [],
+  "drive": [
+    { "click": "[data-choice=mnx-storage]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-choice=textcontent]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-action=finish]" },
+    { "expect": "complete" }
+  ]
+}

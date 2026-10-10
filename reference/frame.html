@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' blob:; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; connect-src 'none'; form-action 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'">
+<style>
+  html, body { margin: 0; height: 100%; }
+  /* Theme v1 defaults, so plain text is in the app's font and colour rather
+     than the browser's serif. An add-on's own styles override these. */
+  html { font-family: var(--mnx-font, system-ui, sans-serif); color: var(--mnx-text, CanvasText); }
+  html[data-mnx-backdrop="solid"] { background: var(--mnx-canvas); }
+  #root { height: 100%; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(function () {
+  var VERSION = 1;
+  var started = false;
+  var runId = null;
+
+  // Match bridge replies by request ID; responses can arrive out of order.
+  var pending = {};
+  var nextRequestId = 0;
+
+  // Deliver prop changes without remounting the add-on.
+  var updateHandler = null;
+  // Set through mnx.onTheme. Called after a new theme has been applied.
+  var themeHandler = null;
+  var currentTheme = null;
+
+  function setTokens(tokens) {
+    if (!tokens) return;
+    var root = document.documentElement;
+    for (var token in tokens) {
+      if (Object.prototype.hasOwnProperty.call(tokens, token)) {
+        root.style.setProperty(token, tokens[token]);
+      }
+    }
+  }
+
+  // Apply theme tokens, styling attributes and the browser colour scheme.
+  function applyTheme(theme) {
+    if (!theme || typeof theme !== 'object') return;
+    currentTheme = theme;
+    setTokens(theme.tokens);
+    var root = document.documentElement;
+    root.setAttribute('data-mnx-scheme', theme.scheme === 'dark' ? 'dark' : 'light');
+    root.setAttribute('data-mnx-edges', String(theme.edges || 'none'));
+    root.setAttribute('data-mnx-motion', theme.reducedMotion ? 'reduced' : 'full');
+    root.setAttribute('data-mnx-backdrop', theme.backdrop === 'solid' ? 'solid' : 'transparent');
+    root.style.colorScheme = theme.scheme === 'dark' ? 'dark' : 'light';
+  }
+
+  function send(message, transfer) {
+    message.protocolVersion = VERSION;
+    parent.postMessage(message, '*', transfer || []);
+  }
+
+  function request(payload) {
+    return new Promise(function (resolve, reject) {
+      if (!runId) {
+        reject(new Error('The add-on is not running yet.'));
+        return;
+      }
+      var id = 'r' + (nextRequestId++);
+      pending[id] = { resolve: resolve, reject: reject };
+      send({ kind: 'bridge-request', runId: runId, requestId: id, payload: payload });
+    });
+  }
+
+  window.addEventListener('message', function (event) {
+    var message = event.data;
+    if (!message || message.protocolVersion !== VERSION) return;
+
+    if (message.kind === 'bridge-response') {
+      var waiting = pending[message.requestId];
+      if (!waiting) return;
+      delete pending[message.requestId];
+      if (message.ok) waiting.resolve(message.value);
+      else waiting.reject(new Error(message.error || 'The host refused that request.'));
+      return;
+    }
+
+    if (message.kind === 'dispose') {
+      document.getElementById('root').textContent = '';
+      // Reject pending requests when the run ends.
+      for (var id in pending) {
+        if (Object.prototype.hasOwnProperty.call(pending, id)) {
+          pending[id].reject(new Error('The add-on was closed.'));
+        }
+      }
+      pending = {};
+      return;
+    }
+
+    if (message.kind === 'theme') {
+      if (!started || message.runId !== runId) return;
+      setTokens(message.tokens);
+      applyTheme(message.theme);
+      if (themeHandler) {
+        try {
+          themeHandler(message.theme);
+        } catch (error) {
+          send({ kind: 'error', runId: runId, message: String(error) });
+        }
+      }
+      return;
+    }
+
+    if (message.kind === 'update') {
+      if (!started || message.runId !== runId) return;
+      window.mnx.props = message.props;
+      if (updateHandler) {
+        try {
+          updateHandler(message.props);
+        } catch (error) {
+          send({ kind: 'error', runId: runId, message: String(error) });
+        }
+      }
+      return;
+    }
+
+    if (message.kind !== 'init' || started) return;
+    started = true;
+    runId = message.runId;
+
+    // Apply host styles before loading the add-on.
+    setTokens(message.tokens);
+    applyTheme(message.theme);
+    if (message.styles) {
+      var sheet = document.createElement('style');
+      sheet.textContent = message.styles;
+      document.head.appendChild(sheet);
+    }
+
+    // Expose the add-on API before its bundle runs.
+    window.mnx = {
+      protocolVersion: VERSION,
+      capabilities: ['study-examples-v1', 'study-storage-v1', 'study-section-v1', 'theme-v1', 'settings-v1', 'addon-learning-v1', 'source-media-v1'],
+      props: message.props,
+      root: document.getElementById('root'),
+
+      /** The theme in force: scheme, edges, reducedMotion and the --mnx-* tokens. */
+      get theme() {
+        return currentTheme;
+      },
+
+      /** Called after theme tokens are applied, for canvases and other JS-rendered content. */
+      onTheme: function (handler) {
+        themeHandler = typeof handler === 'function' ? handler : null;
+      },
+
+      complete: function (result) {
+        send({ kind: 'complete', runId: runId, result: result });
+      },
+      exit: function () {
+        send({ kind: 'exit', runId: runId });
+      },
+
+      /** Called with fresh props when the host replaces them mid-run. */
+      onUpdate: function (handler) {
+        updateHandler = typeof handler === 'function' ? handler : null;
+      },
+
+      /** Read a declared pack asset as an ArrayBuffer. Rejects undeclared or evicted files. */
+      sourceAsset: function (id) { return request({ channel: 'source-asset', id: id }); },
+      asset: function (path) {
+        return request({ channel: 'asset', path: path });
+      },
+
+      /** Ask the host to run a model call. Requires the ai:generate permission. */
+      generate: function (options) {
+        var settings = options || {};
+        return request({
+          channel: 'ai',
+          prompt: settings.prompt,
+          system: settings.system,
+          json: settings.json === true
+        });
+      },
+
+      /** Pack-scoped storage; requires storage:local. Browser storage is unavailable. */
+      storage: {
+        get: function (key) {
+          return request({ channel: 'storage', op: 'get', key: key });
+        },
+        set: function (key, value) {
+          return request({ channel: 'storage', op: 'set', key: key, value: value });
+        },
+        delete: function (key) {
+          return request({ channel: 'storage', op: 'delete', key: key });
+        },
+        keys: function () {
+          return request({ channel: 'storage', op: 'keys' });
+        }
+      },
+
+      /**
+       * Call a contributed data source; requires network permission.
+       * The host applies source settings, credentials and rate limits.
+       */
+      externalApi: function (apiId, opId, params) {
+        return request({
+          channel: 'external-api',
+          apiId: apiId,
+          opId: opId,
+          params: params
+        });
+      },
+
+      /** Index views only: tell the host the user picked a concept. */
+      selectConcept: function (conceptId) {
+        send({ kind: 'select-concept', runId: runId, conceptId: conceptId });
+      }
+    };
+
+    try {
+      var blob = new Blob([message.code], { type: 'text/javascript' });
+      var element = document.createElement('script');
+      element.onload = function () { send({ kind: 'ready', runId: runId }); };
+      element.onerror = function () {
+        send({ kind: 'error', runId: runId, message: 'Add-on code failed to load.' });
+      };
+      element.src = URL.createObjectURL(blob);
+      document.head.appendChild(element);
+    } catch (error) {
+      send({ kind: 'error', runId: runId, message: String(error) });
+    }
+  });
+
+  // Forward runtime errors and rejected promises; script.onerror covers load failures only.
+  window.addEventListener('error', function (event) {
+    if (!runId) return;
+    send({ kind: 'error', runId: runId, message: event.message || 'The add-on threw.' });
+  });
+  window.addEventListener('unhandledrejection', function (event) {
+    if (!runId) return;
+    var reason = event.reason;
+    send({
+      kind: 'error',
+      runId: runId,
+      message: (reason && reason.message) || String(reason) || 'The add-on rejected.'
+    });
+  });
+
+  // Register listeners before announcing boot. Retry until the host responds;
+  // duplicate boot messages are ignored.
+  var announcements = 0;
+  var announce = function () {
+    if (started || announcements > 40) return;
+    announcements++;
+    send({ kind: 'boot' });
+    setTimeout(announce, 50);
+  };
+  announce();
+}());
+</script>
+</body>
+</html>

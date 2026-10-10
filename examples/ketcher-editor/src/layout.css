@@ -1,0 +1,26 @@
+/* The add-on fills its slot: a bar on top, Ketcher below it. */
+.ketcher-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 560px;
+  box-sizing: border-box;
+  padding: 12px;
+  gap: 12px;
+}
+.ketcher-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+.ketcher-host {
+  position: relative;
+  flex: 1;
+  min-height: 480px;
+  overflow: hidden;
+  border-radius: var(--mnx-radius-surface);
+  border: var(--mnx-edge-width) solid var(--mnx-edge-color);
+  box-shadow: var(--mnx-shadow);
+}

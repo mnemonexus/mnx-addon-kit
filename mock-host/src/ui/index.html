@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MnemoNexus mock host</title>
+<link rel="stylesheet" href="/host.css">
+</head>
+<body>
+<header class="bar">
+  <div class="bar__title"><strong>Mock host</strong> <span id="addon-name" class="muted"></span></div>
+  <div class="bar__actions">
+    <a id="gallery-link" class="pill" href="/gallery" title="Every UI library component, in the current theme">UI gallery</a>
+    <div id="build-status" class="pill">loading…</div>
+  </div>
+</header>
+<main class="layout">
+  <section class="stage" aria-label="Add-on">
+    <div id="stage-banner" class="banner" hidden></div>
+    <div id="frame-slot" class="frame-slot">
+      <p class="placeholder">Pick a scenario and press <strong>Launch</strong>.</p>
+    </div>
+  </section>
+  <aside class="panel" aria-label="Controls">
+    <section class="card">
+      <h2>Launch</h2>
+      <label>Surface <select id="surface"></select></label>
+      <label>Scenario <select id="scenario"></select></label>
+      <label>AI mode <select id="ai-mode">
+        <option value="canned">Canned answers from the scenario</option>
+        <option value="refuse">Refuse every call</option>
+        <option value="live">Live model (MNX_AI_BASE_URL)</option>
+      </select></label>
+      <div id="scenario-info" class="info"></div>
+      <div id="source-row" hidden>
+        <label for="source-text">Source text (edit and Launch to prepare again)</label>
+        <textarea id="source-text" rows="5"></textarea>
+      </div>
+      <div class="row">
+        <button id="launch" class="btn btn--primary">Launch</button>
+        <button id="relaunch" class="btn">Relaunch</button>
+        <button id="dispose" class="btn">Dispose</button>
+        <button id="send-update" class="btn" title="Post update with the same props, as the host does when props change mid-run">Send update</button>
+      </div>
+      <label class="inline small"><input type="checkbox" id="keep-open"> Keep the frame open after complete or exit</label>
+      <div class="row small">Run: <span id="run-state" class="pill">none</span> <span id="run-id" class="muted mono"></span></div>
+    </section>
+    <section class="card">
+      <h2>Appearance (theme v1)</h2>
+      <div class="row" role="radiogroup" aria-label="Appearance">
+        <label class="inline"><input type="radio" name="theme-mode" value="match" checked> Match MnemoNexus</label>
+        <label class="inline"><input type="radio" name="theme-mode" value="custom"> Custom</label>
+      </div>
+      <div class="row" role="radiogroup" aria-label="Scheme">
+        <label class="inline"><input type="radio" name="theme" value="light" checked> Light</label>
+        <label class="inline"><input type="radio" name="theme" value="dark"> Dark</label>
+      </div>
+      <div class="grid2">
+        <label>Accent <input type="color" id="accent" value="#2f7b5e"></label>
+        <label>Corners <select id="corners">
+          <option value="0">Square (0px)</option>
+          <option value="8">Soft (8px)</option>
+          <option value="16">Round (16px)</option>
+        </select></label>
+        <label>Edges <select id="edges">
+          <option value="lines">Lines</option>
+          <option value="shadows">Shadows</option>
+          <option value="both">Both</option>
+          <option value="none" id="edges-none">None (Match only)</option>
+        </select></label>
+        <label>Line width <select id="line-width">
+          <option value="1">1 px</option>
+          <option value="2">2 px</option>
+          <option value="3">3 px</option>
+        </select></label>
+        <label>Line strength (%) <input type="number" id="line-strength" min="10" max="100" step="10" value="100"></label>
+        <label>Shadow strength (%) <input type="number" id="shadow-strength" min="10" max="400" step="10" value="100"></label>
+      </div>
+      <label class="inline small"><input type="checkbox" id="app-accent" checked> The app's accent (the first swatch)</label>
+      <label class="inline small"><input type="checkbox" id="reduced-motion"> Reduced motion</label>
+      <label class="inline small"><input type="checkbox" id="more-colours" checked> More colours</label>
+      <label class="inline small"><input type="checkbox" id="solid-backdrop"> Solid backdrop (Custom only)</label>
+      <p class="small muted">Changes are sent live as a <code>theme</code> message. Nothing remounts.</p>
+    </section>
+    <section class="card">
+      <h2>Settings (settings v1) <button id="reset-settings" class="btn btn--sm">Reset to defaults</button></h2>
+      <div id="settings"></div>
+      <div id="model-calls-row" hidden>
+        <label>Model calls <select id="model-calls">
+          <option value="on">MnemoNexus AI</option>
+          <option value="off">Off</option>
+        </select></label>
+      </div>
+      <p class="small muted">props.settings: <code id="settings-props"></code></p>
+    </section>
+    <section class="card">
+      <h2>Result</h2>
+      <div id="results"><p class="small muted">No result yet.</p></div>
+    </section>
+    <section class="card">
+      <h2>Storage <button id="clear-storage" class="btn btn--sm">Clear</button></h2>
+      <p id="storage-scope" class="small muted"></p>
+      <div id="storage"></div>
+    </section>
+    <section class="card card--log">
+      <h2>Messages <button id="clear-log" class="btn btn--sm">Clear</button></h2>
+      <ol id="log" class="log"></ol>
+    </section>
+  </aside>
+</main>
+<script src="/host.js"></script>
+</body>
+</html>

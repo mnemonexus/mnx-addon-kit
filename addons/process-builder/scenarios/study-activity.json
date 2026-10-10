@@ -1,0 +1,31 @@
+{
+  "title": "Study: order the numbered process",
+  "activity": { "offer": 0 },
+  "study": { "workspaceId": "preview-workspace", "lectureId": "preview-lecture", "lectureTitle": "Preview lecture",
+             "subsectionId": "preview-process", "subsectionTitle": "Preview process" },
+  "source": {
+    "objective": "Reconstruct an explicitly numbered process",
+    "text": "Example source:\n1. Gather the supplied material.\n2. Perform the stated transformation.\n3. Inspect the result."
+  },
+  "drive": [
+    { "click": "[data-action=hint]" },
+    { "waitForText": "[role=status]", "text": "Step 1: Gather the supplied material." },
+    { "press": "Enter", "on": "[data-step='0']" },
+    { "waitForText": "ol", "text": "Gather the supplied material." },
+    { "click": "[data-action=return]" },
+    { "expect": "exit" },
+    { "relaunch": true },
+    { "waitForText": "ol", "text": "Gather the supplied material." },
+    { "click": "[data-step='2']" },
+    { "click": "[data-step='1']" },
+    { "click": "[data-action=check]" },
+    { "waitForText": "[role=status]", "text": "Some steps are out of order." },
+    { "click": "[data-action=restart]" },
+    { "click": "[data-step='0']" },
+    { "click": "[data-step='1']" },
+    { "click": "[data-step='2']" },
+    { "click": "[data-action=check]" },
+    { "expect": "complete" }
+  ],
+  "expectResult": { "completed": true, "studyEvidence": { "attempts": 2, "hintsUsed": 1, "solvedStepIds": ["step-1", "step-2", "step-3"] } }
+}

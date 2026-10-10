@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "mnxpack_manifest_v1",
+  "id": "ui-gallery",
+  "version": "0.1.0",
+  "kind": "experience",
+  "label": "UI gallery",
+  "description": "Every component of the MnemoNexus add-on UI library, in the current theme. Change the theme, or this add-on's Appearance setting, to see each one follow it.",
+  "tagline": "The UI library, on one page",
+  "icon": "fa-solid fa-swatchbook",
+  "author": "MnemoNexus",
+  "knowledgeBinding": { "mode": "none" },
+  "surfaces": {},
+  "permissions": [],
+  "engines": { "mnxSdk": "1.0.0" },
+  "entry": { "logicalPath": "code/main.cjs" },
+  "assets": []
+}

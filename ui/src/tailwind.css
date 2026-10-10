@@ -1,0 +1,24 @@
+/*
+ * The MnemoNexus preset for Tailwind CSS 4.
+ *
+ * Every colour, radius, shadow, font and transition length maps to a theme v1
+ * token (HOST_CONTRACT.md section 11), so Tailwind classes follow the user's
+ * look: light and dark, their colours, corners, edges and motion.
+ *
+ *   bg-mnx-surface  text-mnx-text  border-mnx-border-inner  bg-mnx-accent text-mnx-accent-text
+ *   rounded-mnx-surface  shadow-mnx  font-mnx-heading  border-mnx (the surface edge)
+ *
+ * It replaces Tailwind's own palette: `bg-white` or `text-gray-500` would
+ * ignore dark mode, so they don't exist here. Tailwind's usual radius and
+ * shadow names (`rounded-lg`, `shadow-md`) are mapped to the theme's.
+ *
+ * The kit adds this file whenever an add-on's CSS uses Tailwind (GUIDE.md
+ * section 10). The mappings themselves are in tailwind-tokens.css.
+ */
+
+/* First, remove Tailwind's palette; then add the tokens. */
+@theme {
+  --color-*: initial;
+}
+
+@import "./tailwind-tokens.css";

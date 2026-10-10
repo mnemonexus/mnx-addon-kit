@@ -1,0 +1,25 @@
+{
+  "name": "@mnemonexus/addon-ui",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Components that make a MnemoNexus add-on look like part of the app. Reads only the theme v1 tokens.",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.mjs"
+    },
+    "./tailwind.css": "./src/tailwind.css",
+    "./tailwind-tokens.css": "./src/tailwind-tokens.css",
+    "./tailwind-v3.css": "./src/tailwind-v3.css",
+    "./addon-ui.css": "./src/addon-ui.css"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "bun scripts/build-css.mjs",
+    "test": "bun test"
+  }
+}

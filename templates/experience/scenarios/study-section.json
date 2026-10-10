@@ -1,0 +1,64 @@
+{
+  "title": "Study, with section content and items",
+  "surface": "study",
+  "study": {
+    "taskId": "photosynthesis-basics",
+    "workspaceId": "ws-demo",
+    "lectureId": "bio-101-lecture-5",
+    "lectureTitle": "Biology 101: energy in cells",
+    "subsectionId": "photosynthesis",
+    "subsectionTitle": "Photosynthesis",
+    "depth": "core",
+    "section": {
+      "objective": "Explain where the two stages of photosynthesis happen.",
+      "text": "## Photosynthesis\n\nThe light-dependent reactions run in the thylakoid membranes. The Calvin cycle runs in the stroma and fixes carbon dioxide."
+    }
+  },
+  "items": [
+    {
+      "itemId": "p-1",
+      "conceptId": "c-thylakoid",
+      "conceptTitle": "Thylakoid",
+      "descriptorType": "location",
+      "text": "Membrane stacks inside the chloroplast where light is captured."
+    },
+    {
+      "itemId": "p-2",
+      "conceptId": "c-calvin",
+      "conceptTitle": "Calvin cycle",
+      "conceptKind": "process",
+      "descriptorType": "mechanism_step",
+      "descriptorStructure": "sequence",
+      "text": "Fixes carbon dioxide into sugar using ATP and NADPH.",
+      "structuredItems": [
+        "Carbon fixation",
+        "Reduction",
+        "Regeneration of RuBP"
+      ]
+    }
+  ],
+  "drive": [
+    {
+      "waitForText": "[data-view=check]",
+      "text": "This section: Explain where"
+    },
+    {
+      "click": "[data-choice=thylakoid]"
+    },
+    {
+      "click": "[data-action=next]"
+    },
+    {
+      "press": "2"
+    },
+    {
+      "click": "[data-action=next]"
+    },
+    {
+      "click": "[data-action=finish]"
+    },
+    {
+      "expect": "complete"
+    }
+  ]
+}

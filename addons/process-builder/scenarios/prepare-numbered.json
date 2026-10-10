@@ -1,0 +1,10 @@
+{
+  "title": "Prepare: numbered steps in the source",
+  "prepare": true,
+  "study": { "workspaceId": "preview-workspace", "lectureId": "preview-lecture", "subsectionId": "preview-process" },
+  "source": {
+    "objective": "Reconstruct an explicitly numbered process",
+    "text": "Example source:\n1. Gather the supplied material.\n2. Perform the stated transformation.\n3. Inspect the result."
+  },
+  "expectOffers": 1
+}

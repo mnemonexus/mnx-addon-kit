@@ -1,0 +1,10 @@
+{
+  "title": "Standalone: nothing in order",
+  "surface": "standalone",
+  "items": [],
+  "drive": [
+    { "waitForText": "h2", "text": "Process Builder" },
+    { "click": "[data-action=return]" },
+    { "expect": "exit" }
+  ]
+}

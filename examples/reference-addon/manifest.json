@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "mnxpack_manifest_v1",
+  "id": "reference-addon",
+  "version": "1.0.0",
+  "kind": "experience",
+  "label": "Reference Add-on",
+  "description": "Three true-or-false questions. Exists to prove the sandboxed add-on runtime works end to end.",
+  "tagline": "The smallest possible add-on",
+  "icon": "fa-solid fa-vial",
+  "author": "MnemoNexus",
+  "knowledgeBinding": { "mode": "none" },
+  "surfaces": { "calendar": { "defaultMinutes": 2, "recurrable": true } },
+  "permissions": ["schedule:calendar"],
+  "engines": { "mnxSdk": "1.0.0" },
+  "entry": { "logicalPath": "code/main.cjs" },
+  "assets": []
+}

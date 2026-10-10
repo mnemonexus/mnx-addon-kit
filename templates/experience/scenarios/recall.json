@@ -1,0 +1,21 @@
+{
+  "title": "Recall, a timed round of three",
+  "surface": "recall",
+  "items": [
+    { "itemId": "r-1", "lineageId": "lin-r1", "conceptId": "c-nucleus", "conceptTitle": "Nucleus", "text": "Holds the cell's chromosomes behind a double membrane." },
+    { "itemId": "r-2", "lineageId": "lin-r2", "conceptId": "c-membrane", "conceptTitle": "Cell membrane", "text": "A phospholipid bilayer that controls what enters and leaves." },
+    { "itemId": "r-3", "lineageId": "lin-r3", "conceptId": "c-chloro", "conceptTitle": "Chloroplast", "text": "Captures light energy to make sugar in plant cells." },
+    { "itemId": "r-4", "lineageId": "lin-r4", "conceptId": "c-vacuole", "conceptTitle": "Vacuole", "text": "Stores water and keeps a plant cell firm." }
+  ],
+  "drive": [
+    { "click": "[data-choice=c-nucleus]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-choice=c-chloro]" },
+    { "click": "[data-choice=c-membrane]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-choice=c-chloro]" },
+    { "click": "[data-action=next]" },
+    { "click": "[data-action=finish]" },
+    { "expect": "complete" }
+  ]
+}

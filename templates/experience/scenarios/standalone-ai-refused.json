@@ -1,0 +1,11 @@
+{
+  "title": "Standalone, model refuses (hint falls back)",
+  "surface": "standalone",
+  "ai": { "mode": "refuse" },
+  "drive": [
+    { "click": "[data-action=hint]" },
+    { "waitForText": "[role=status]", "text": "Hint: The sandbox blocks" },
+    { "click": "[data-action=leave]" },
+    { "expect": "exit" }
+  ]
+}

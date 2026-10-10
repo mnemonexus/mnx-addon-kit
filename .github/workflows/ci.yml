@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    name: check (${{ matrix.os }}, ${{ matrix.linker }} linker)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest, linker: isolated }
+          - { os: ubuntu-latest, linker: hoisted }
+          - { os: windows-latest, linker: isolated }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      # The headless runner drives Playwright from Node (it hangs under Bun on Windows).
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install
+        run: bun install --frozen-lockfile --linker ${{ matrix.linker }}
+      - name: Unit tests
+        run: bun test
+      - name: Install the ported example's own dependencies
+        # examples/ketcher-editor has its own package.json, like any ported project.
+        run: npm ci --prefix examples/ketcher-editor --no-audit --no-fund
+      - name: Install Chromium for the headless runs
+        run: bunx playwright install --with-deps chromium
+      - name: Check every add-on, example, template and the UI gallery
+        # A run without a browser fails; CI refuses --no-browser.
+        # --screenshots also fails any text that is hard to read, in 18 themes.
+        run: bun run check --all --screenshots
+      - name: Keep the screenshots
+        if: always() && matrix.os == 'ubuntu-latest' && matrix.linker == 'isolated'
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: |
+            addons/*/screenshots/
+            examples/*/screenshots/
+            templates/*/screenshots/
+            ui/*/screenshots/
+          if-no-files-found: ignore

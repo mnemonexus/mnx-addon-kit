@@ -1,0 +1,10 @@
+{
+  "title": "Calendar session",
+  "surface": "calendar",
+  "drive": [
+    { "click": "[data-answer=false]" },
+    { "click": "[data-answer=true]" },
+    { "click": "[data-answer=false]" },
+    { "expect": "complete" }
+  ]
+}

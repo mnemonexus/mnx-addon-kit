@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "mnxpack_manifest_v1",
+  "id": "ketcher-editor",
+  "version": "0.1.0",
+  "kind": "experience",
+  "label": "Ketcher Editor",
+  "description": "Draw a chemical structure with Ketcher, EPAM's open-source structure editor. An example of an existing open-source project ported into a MnemoNexus add-on.",
+  "tagline": "An open-source chemistry editor, ported",
+  "icon": "fa-solid fa-flask",
+  "author": "MnemoNexus",
+  "knowledgeBinding": { "mode": "none" },
+  "surfaces": {},
+  "permissions": [],
+  "engines": { "mnxSdk": "1.0.0" },
+  "entry": { "logicalPath": "code/main.cjs" },
+  "assets": []
+}
